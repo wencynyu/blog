@@ -1,0 +1,42 @@
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title>Auto height - Editor.md examples</title>
+  <link rel="stylesheet" href="../../static/markdown/css/style.css" />
+  <link rel="stylesheet" href="../../static/markdown/css/editormd.css" />
+</head>
+<body>
+<div id="layout">
+  <div id="test-editormd">
+                <textarea style="display:none;">
+
+                </textarea>
+  </div>
+</div>
+<script src="../../static/markdown/js/jquery.min.js"></script>
+<script src="../../static/markdown/js/editormd.js"></script>
+<script type="text/javascript">
+    var testEditor;
+
+    $(function() {
+        testEditor = editormd("test-editormd", {
+            width           : "90%",
+            autoHeight      : true,
+            path            : "../../static/markdown/lib/",
+            htmlDecode      : "style,script,iframe",
+            tex             : true,
+            emoji           : true,
+            taskList        : true,
+            flowChart       : true,
+            sequenceDiagram : true
+        });
+
+        $("#append-btn").click(function(){
+            $.get("../../static/markdown/test.md", function(md){
+                testEditor.appendMarkdown(md);
+            });
+        });
+    });
+</script>
+</body>
+</html>

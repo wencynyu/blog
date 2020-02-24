@@ -1,0 +1,24 @@
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+
+<!-- SLIDE PANEL -->
+<div th:fragment="pannel" id="eskimo-panels">
+  <aside id="eskimo-panel" class="eskimo-panel">
+    <div class="eskimo-panel-inner">
+      <!-- CLOSE SLIDE PANEL BUTTON -->
+      <a href="#" class="eskimo-panel-close"><i class="fa fa-times"></i></a>
+      <!-- AUTHOR BOX -->
+      <div class="eskimo-author-box eskimo-widget">
+        <div class="eskimo-author-img">
+          <img src="http://eskimo.egemenerd.com/wp-content/uploads/2018/05/img.jpg" alt="JOHN DOE" />
+        </div>
+        <h3><span>喻文鑫</span></h3>
+        <p class="eskimo-author-subtitle">WEB开发者</p>
+        <p class="eskimo-author-description">I'm a Web Developer and Designer with a strong passion for UX/UI design. I have experience building websites, web applications, and brand assets. Contact me if you have any questions!</p>
+        <div class="eskimo-author-box-btn">
+          <a class="btn btn-default" href="#" th:href="@{/aboutMe}">联系我</a>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+</div>

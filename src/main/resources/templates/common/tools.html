@@ -1,0 +1,125 @@
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+
+<!-- FULLSCREEN SEARCH -->
+<div th:fragment="full-screen-search" id="eskimo-fullscreen-search">
+  <div id="eskimo-fullscreen-search-content">
+    <a href="#" id="eskimo-close-search"><i class="fa fa-times"></i></a>
+    <form role="search" method="get" action="#" th:action="@{/article/search/}" class="eskimo-lg-form">
+      <div class="input-group">
+        <input type="text" class="form-control form-control-lg" placeholder="Enter a keyword..." name="searchName" />
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div th:fragment="slidebar" id="eskimo-sidebar">
+  <div id="eskimo-sidebar-wrapper" class="d-flex align-items-start flex-column h-100 w-100">
+    <!-- LOGO -->
+    <div id="eskimo-logo-cell" class="w-100">
+      <a class="eskimo-logo-link" href="#" th:href="@{/index}">
+        <img src="/images/logo.png" th:src="@{/images/logo.png}" class="eskimo-logo" alt="eskimo" />
+      </a>
+    </div>
+    <!-- MENU CONTAINER -->
+    <div id="eskimo-sidebar-cell" class="w-100">
+      <!-- MOBILE MENU BUTTON -->
+      <div id="eskimo-menu-toggle">目录</div>
+      <!-- MENU -->
+      <nav id="eskimo-main-menu" class="menu-main-menu-container">
+        <ul class="eskimo-menu-ul">
+          <li><a href="#" th:href="@{/index}">主页</a></li>
+          <li><a href="#">Blog</a>
+            <ul class="sub-menu container-fluid">
+              <li class="dropdown" style="padding: 0">
+                <button type="button" th:href="@{/article/listAll}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  全部Blog
+                </button>
+                <ul class="dropdown-menu">
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/all-blogs}" style="padding: 5px 0;">查看所有</a></li>
+                </ul>
+              </li>
+              <li class="dropdown" style="padding: 0">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  技术Blog
+                </button>
+                <ul class="dropdown-menu">
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/category/javaweb}" style="padding: 5px 0;">JavaWeb</a></li>
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/category/java大数据}" style="padding: 5px 0;">Java大数据</a></li>
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/category/python与机器学习}" style="padding: 5px 0;">python与机器学习</a></li>
+                </ul>
+              </li>
+              <li class="dropdown" style="padding: 0">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  生活Blog
+                </button>
+                <ul class="dropdown-menu">
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/category/厨艺初修}" style="padding: 5px 0;">厨艺初修</a></li>
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/category/动人鸡汤}" style="padding: 5px 0;">动人鸡汤</a></li>
+                </ul>
+              </li>
+              <li class="dropdown" style="padding: 0">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  爱好Blog
+                </button>
+                <ul class="dropdown-menu">
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/category/吉他}" style="padding: 5px 0;">吉他</a></li>
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/category/游戏}" style="padding: 5px 0;">游戏</a></li>
+                  <li style="padding: 5px 0"><a class="dropdown-item" href="#" th:href="@{/article/view/category/电子产品}" style="padding: 5px 0;">电子产品</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">我的作品集</a></li>
+          <li><a href="#" th:href="@{/aboutMe}">关于我</a></li>
+          <li shiro:guest><a th:href="@{/login}" style="float: left">登录/</a><a th:href="@{/register}" style="float: left">注册</a>&nbsp;</li>
+          <li shiro:hasRole="admin"><a href="#">后台管理</a></li>
+          <li shiro:user><a th:href="@{/logout}">注销当前用户</a></li>
+<!--          <li th:if="${#session.getAttribute('user').getIduser() == null}"><a th:href="@{/login}" style="float: left">登录/</a><a th:href="@{/register}" style="float: left">注册</a>&nbsp;</li>-->
+<!--          <li th:if="${#session.getAttribute('user').isAdmin()}"><a href="#">后台管理</a></li>-->
+<!--          <li th:if="${#session.getAttribute('user').getIduser() != null}"><a th:href="@{/logout}">注销当前用户</a> </li>-->
+<!--          <li>-->
+<!--            <div class="alert alert-info">-->
+<!--              <div class="close" data-dismiss="alert">×</div>-->
+<!--              <h4 style="color: #111111">获取更好的服务</h4>-->
+<!--              <a th:href="@{/login}">登录</a>-->
+<!--              <a th:href="@{/register}">注册</a>-->
+<!--            </div>-->
+<!--          </li>-->
+        </ul>
+      </nav>
+    </div>
+    <!-- SOCIAL MEDIA ICONS -->
+    <div id="eskimo-social-cell" class="mt-auto w-100">
+      <div id="eskimo-social-inner">
+        <ul class="eskimo-social-icons">
+          <li><a href="https://github.com/wencynyu"><i class="fa fa-github"></i></a></li>
+          <li><a href="https://weibo.com/u/5688270218?is_all=1"><i class="fa fa-weibo"></i></a></li>
+          <li><a href="https://wx.qq.com/"><i class="fa fa-weixin"></i></a></li>
+          <li><a href="https://apple.com/"><i class="fa fa-apple"></i></a></li>
+          <li><a href="https://baidu.com/"><i class="fa fa-calendar"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOP ICONS -->
+<div th:fragment="top-icons">
+  <ul class="eskimo-top-icons">
+    <li id="eskimo-panel-icon">
+      <a href="#eskimo-panel" class="eskimo-panel-open"><i class="fa fa-bars"></i></a>
+    </li>
+    <li id="eskimo-search-icon">
+      <a id="eskimo-open-search" href="#"><i class="fa fa-search"></i></a>
+    </li>
+  </ul>
+  <div class="clearfix"></div>
+</div>
+
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org" th:title="错误页面">
+<div th:replace="common/head::head"></div>
+
+<body>
+<!-- READING POSITION INDICATOR -->
+<progress value="0" id="eskimo-progress-bar">
+        <span class="eskimo-progress-container">
+            <span class="eskimo-progress-bar"></span>
+        </span>
+</progress>
+<!-- SITE WRAPPER -->
+<div id="eskimo-site-wrapper">
+  <!-- MAIN CONTAINER -->
+  <main id="eskimo-main-container">
+    <div class="container">
+      <div th:replace="common/tools::slidebar"></div>
+      <div th:replace="common/tools::top-icons"></div>
+      <div class="col">
+        <span>你没有足够的权限！！！</span>
+        <span>有疑问请联系系统管理员@wenxyn</span>
+      </div>
+    </div>
+  </main>
+  <!-- FOOTER -->
+  <div th:replace="common/footer::footer"></div>
+</div>
+<div th:replace="common/footer::footer2-toTop"></div>
+<div th:replace="common/pannel::pannel"></div>
+<div th:replace="common/tools::full-screen-search"></div>
+<!-- JS FILES -->
+<div th:replace="common/jsfile::jsfile"></div>
+<!-- POST SLIDER -->
+<script>
+    (function($) {
+        "use strict";
+        $(document).ready(function() {
+            $('#eskimo-post-slider').slick({
+                autoplay: true,
+                autoplaySpeed: 5000,
+                slidesToScroll: 1,
+                adaptiveHeight: true,
+                slidesToShow: 1,
+                arrows: true,
+                dots: false,
+                fade: true
+            });
+        });
+        $(window).on('load', function() {
+            $('#eskimo-post-slider').css('opacity', '1');
+            $('#eskimo-post-slider').parent().removeClass('eskimo-bg-loader');
+        });
+    })(jQuery);
+</script>
+<!-- POST CAROUSEL -->
+<script>
+    (function($) {
+        "use strict";
+        $(document).ready(function() {
+            $('#eskimo-post-carousel').slick({
+                infinite: false,
+                slidesToScroll: 1,
+                arrows: true,
+                dots: false,
+                slidesToShow: 3,
+                responsive: [{
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                }, {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }]
+
+            });
+            $('#eskimo-post-carousel').css('opacity', '1');
+        });
+    })(jQuery);
+</script>
+</body>
+
+
+<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban.html -->
+</html>

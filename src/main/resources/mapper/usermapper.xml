@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuwenxin.blog.dao.UserDao">
+  <insert id="insert" parameterType="com.yuwenxin.blog.model.User" useGeneratedKeys="true" keyProperty="iduser">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iduser != null">
+        iduser,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phoneNumber != null">
+        phonenumber,
+      </if>
+      <if test="registerTime != null">
+        registerTime,
+      </if>
+      <if test="isAdmin != null">
+        isadmin,
+      </if>
+      <if test="isChecked != null">
+        ischecked,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iduser != null">
+        #{iduser,jdbcType=Integer}
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAdmin != null">
+        #{isAdmin,jdbcType=TINYINT},
+      </if>
+      <if test="isChecked != null">
+        #{isChecked,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.yuwenxin.blog.model.User">
+    update tb_user
+    set username = #{username,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        gender = #{gender,jdbcType=VARCHAR},
+        phonenumber = #{phoneNumber,jdbcType=VARCHAR},
+        isAdmin = #{isAdmin,jdbcType=TINYINT},
+        isChecked = #{isChecked,jdbcType=TINYINT},
+        status = #{status,jdbcType=TINYINT}
+    where iduser = #{iduser,jdbcType=INTEGER}
+  </update>
+</mapper>

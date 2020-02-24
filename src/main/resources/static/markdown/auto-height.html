@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/editormd.css" />
+    </head>
+    <body>
+        <div id="layout">
+            <div id="test-editormd">
+                <textarea style="display:none;">
+
+                </textarea>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/editormd.js"></script>
+        <script type="text/javascript">
+          var testEditor;
+                $(function() {
+                    testEditor = editormd("test-editormd", {
+                        width           : "90%",
+                        autoHeight      : true,
+                        path            : "./lib/",
+                        htmlDecode      : "style,script,iframe",
+                        tex             : true,
+                        emoji           : true,
+                        taskList        : true,
+                        flowChart       : true,
+                        sequenceDiagram : true
+                    });
+                });
+        </script>
+    </body>
+</html>
