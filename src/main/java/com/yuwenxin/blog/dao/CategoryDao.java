@@ -19,7 +19,9 @@ public interface CategoryDao extends BaseDao<Category> {
     @Select("select * from tb_category")
     List<Category> findAll();
     @Select("select * from tb_category where categoryname like concat('%',#{fuzzyname},'%')")
-    List<Category> fuzzyFind(@Param("fuzzyName") String fuzzyname);
+    List<Category> fuzzyFind(@Param("fuzzyname") String fuzzyname);
+    @Select("select count(*) from tb_category where categoryname like concat('%',#{fuzzyname},'%')")
+    int fuzzyCount(@Param("fuzzyname") String fuzzyName);
     @Select("select * from tb_category where idcategory>#{bias} limit #{start},#{pageNum}")
     List<Category> findAllByPage(@Param("bias") Integer bias, @Param("start") Integer start, @Param("pageNum") Integer pageNum);
     @Select("select * from tb_category where categoryname like concat('%',#{fuzzyname},'%') and idcategory>#{bias} limit #{start},#{pageNum}")

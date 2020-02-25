@@ -151,6 +151,8 @@ public class ShiroConfig {
         map.put("/editor**", "anon");
 
         // 一些简单的内容页面，登录注册页面
+        map.put("/404", "anon");
+        map.put("/403", "anon");
         map.put("/noAuth", "anon");
         map.put("/index", "anon");
         map.put("/aboutMe", "anon");

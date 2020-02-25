@@ -17,7 +17,9 @@ public interface QuestionDao extends BaseDao<Question> {
     @Select("select * from tb_question")
     List<Question> findAll();
     @Select("select * from tb_question where content like concat('%',#{fuzzyname},'%')")
-    List<Question> fuzzyFind(@Param("fuzzyName") String fuzzyname);
+    List<Question> fuzzyFind(@Param("fuzzyname") String fuzzyname);
+    @Select("select count(*) from tb_question where content like concat('%',#{fuzzyname},'%')")
+    int fuzzyCount(@Param("fuzzyname") String fuzzyName);
     @Select("select * from tb_question where idquestion>#{bias} limit #{start},#{pageNum}")
     List<Question> findAllByPage(@Param("bias") Integer bias, @Param("start") Integer start, @Param("pageNum") Integer pageNum);
     @Select("select * from tb_question where content like concat('%',#{fuzzyname},'%') and idquestion>#{bias} limit #{start},#{pageNum}")

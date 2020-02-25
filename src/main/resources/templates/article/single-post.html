@@ -18,13 +18,14 @@
                 <div th:replace="common/tools::top-icons"></div>
                 <!-- PAGE TITLE -->
                 <div class="eskimo-page-title">
-                    <h1><span>A Single Post</span></h1>
+                    <h1><span th:text="${article.title}">A Single Post</span></h1>
                     <div class="eskimo-page-title-meta">
+                        <div class="eskimo-cat-meta" th:text="${article.belongedCategory.categoryName}">cate</div>
                         <div class="eskimo-author-meta">
                             By <a class="author-meta" href="#">wenxyn</a>
                         </div>
                         <div class="eskimo-date-meta" th:text="${article.postTime}">May 25, 2018</div>
-                        <div class="eskimo-reading-meta" th:text="${article.watchedNum}">3 min read</div>
+                        <div class="eskimo-reading-meta" th:text="${article.watchedNum} + 'reads'">3 min read</div>
                     </div>
                 </div>
                 <!-- FEATURED IMAGE -->
@@ -160,7 +161,7 @@
                         <h3 class="eskimo-title-with-border">
                             <span>Comments</span>
                         </h3>
-                        <div class="eskimo_commentlist">
+                        <div class="eskimo_commentlist" th:each="${article.comments}">
                             <!-- COMMENT 1 -->
                             <div class="eskimo_comment_wrapper">
                                 <div class="eskimo_comments">
@@ -172,13 +173,13 @@
                                             <div class="eskimo_comment_right">
                                                 <div class="eskimo_comment_right_inner ">
                                                     <cite class="eskimo_fn">
-                                                        <a href='author.html'>Egemenerd</a>
+                                                        <a href='#' th:text="${comment.poster.username}">Egemenerd</a>
                                                     </cite>
                                                     <div class="eskimo_comment_links">
-                                                        <i class="fa fa-clock-o"></i> May 23, 2018 at 9:57 pm - <a href="#">Reply</a>
+                                                        <i class="fa fa-clock-o"></i> <span th:text="${comment.postDate}">May 23, 2018 at 9:57 pm -</span> <a href="#">Reply</a>
                                                     </div>
                                                     <div class="eskimo_comment_text">
-                                                        <p>Tempor cillum nostrud ex sunt expetendis et ipsum quis. Ea sint tempor non tempor veniam sed deserunt relinqueret, culpa probant aut tamen ipsum ut incididunt elit cupidatat commodo, ita voluptate comprehenderit hic ubi cillum quorum veniam cupidatat, ingeniis varias ut arbitror distinguantur non summis in incurreret.</p>
+                                                        <p th:text="${comment.content}">Tempor cillum nostrud ex sunt expetendis et ipsum quis. Ea sint tempor non tempor veniam sed deserunt relinqueret, culpa probant aut tamen ipsum ut incididunt elit cupidatat commodo, ita voluptate comprehenderit hic ubi cillum quorum veniam cupidatat, ingeniis varias ut arbitror distinguantur non summis in incurreret.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -211,31 +212,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- COMMENT 2 -->
-                            <div class="eskimo_comment_wrapper">
-                                <div class="eskimo_comments">
-                                    <div class="eskimo_comment">
-                                        <div class="eskimo_comment_inner">
-                                            <div class="eskimo_comment_left">
-                                                <img alt='' src='http://0.gravatar.com/avatar/0b19666d0fc7a149e6f8f2319a04ef63?s=60&#038;d=mm&#038;r=g' />
-                                            </div>
-                                            <div class="eskimo_comment_right">
-                                                <div class="eskimo_comment_right_inner ">
-                                                    <cite class="eskimo_fn">
-                                                        <a href='author.html'>Egemenerd</a>
-                                                    </cite>
-                                                    <div class="eskimo_comment_links">
-                                                        <i class="fa fa-clock-o"></i> May 23, 2018 at 10:12 pm - <a href="#">Reply</a>
-                                                    </div>
-                                                    <div class="eskimo_comment_text">
-                                                        <p>Probant qui sint expetendis sed quamquam esse aute ad dolor te voluptate quid hic cupidatat exercitation, fabulas a lorem ingeniis, litteris nulla veniam a sunt id arbitror de malis ne nam quem quid quo coniunctione.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -243,6 +219,9 @@
                     <h3>Leave a Reply</h3>
                     <form action="#" th:action="@{/comment/doPost}" th:object="${comment}" method="post" id="commentform">
                         <p><textarea id="comment" name="content" th:value="*{content}" cols="45" rows="8" required="required"></textarea></p>
+                        <label>
+                            <input style="display: none" name="belongedArticleId" th:value="${article.idarticle}">
+                        </label>
                         <input name="submit" type="submit" id="submit" class="btn btn-default" value="Post Comment" />
                     </form>
                 </div>

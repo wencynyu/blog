@@ -29,7 +29,8 @@ public class Comment {
     private User Poster;
     private Integer belongedArticleId;
     private Article article;
-    /**
-     * todo: 这里没有实现给评论的评论，有实际需求可以根据情况来修改表结构以及添加对应的逻辑实现
-     */
+    private Integer belongedQuestionId;
+    private Question question;
+    private Integer receiveUserId;
+    private User receiveUser;
 }

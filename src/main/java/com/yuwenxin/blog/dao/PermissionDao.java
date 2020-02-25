@@ -20,7 +20,9 @@ public interface PermissionDao extends BaseDao<Permission> {
     @Select("select * from tb_permission")
     List<Permission> findAll();
     @Select("select * from tb_permission where permissionname like concat('%',#{fuzzyname},'%')")
-    List<Permission> fuzzyFind(@Param("fuzzyName") String fuzzyname);
+    List<Permission> fuzzyFind(@Param("fuzzyname") String fuzzyname);
+    @Select("select count(*) from tb_permission where permissionname like concat('%',#{fuzzyname},'%')")
+    int fuzzyCount(@Param("fuzzyname") String fuzzyName);
     @Select("select * from tb_permission where idpermission>#{bias} limit #{start},#{pageNum}")
     List<Permission> findAllByPage(@Param("bias") Integer bias, @Param("start") Integer start, @Param("pageNum") Integer pageNum);
     @Select("select * from tb_permission where permissionname like concat('%',#{fuzzyname},'%') and idpermission>#{bias} limit #{start},#{pageNum}")

@@ -17,7 +17,9 @@ public interface TagDao extends BaseDao<Tag> {
     @Select("select * from tb_tag")
     List<Tag> findAll();
     @Select("select * from tb_tag where tagname like concat('%',#{fuzzyname},'%')")
-    List<Tag> fuzzyFind(@Param("fuzzyName") String fuzzyname);
+    List<Tag> fuzzyFind(@Param("fuzzyname") String fuzzyname);
+    @Select("select count(*) from tb_tag where tagname like concat('%',#{fuzzyname},'%')")
+    int fuzzyCount(@Param("fuzzyname") String fuzzyName);
     @Select("select * from tb_tag where idtag>#{bias} limit #{start},#{pageNum}")
     List<Tag> findAllByPage(@Param("bias") Integer bias, @Param("start") Integer start, @Param("pageNum") Integer pageNum);
     @Select("select * from tb_tag where tagname like concat('%',#{fuzzyname},'%') and idtag>#{bias} limit #{start},#{pageNum}")

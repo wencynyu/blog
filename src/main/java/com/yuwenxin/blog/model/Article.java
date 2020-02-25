@@ -34,8 +34,13 @@ public class Article implements Serializable {
     private Integer belongedCategoryId;
     private Category belongedCategory;
 
-    private Integer belongedPosterId;
-    private User poster;
+    /**
+     * 这里进行深度思考后删除
+     * 因为分析需求后明确了系统为私人的专属博客系统，只有博客网站创建者才有发博客的权利
+     * 因此所有article的poster都只会是创建者，不需要额外添加字段来保存发表者这个对象
+     */
+//    private Integer belongedPosterId;
+//    private User poster;
 
     private Set<Tag> tags;
     private List<Comment> comments;

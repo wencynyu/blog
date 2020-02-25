@@ -7,12 +7,15 @@ import com.yuwenxin.blog.dao.*;
 import com.yuwenxin.blog.model.Article;
 import com.yuwenxin.blog.model.Category;
 import com.yuwenxin.blog.service.ArticleService;
+import org.omg.CORBA.ARG_IN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.yuwenxin.blog.core.Settings.DEFAULT_PAGENUM;
 
 @Service
 public class ArticleServiceImpl extends BaseServiceImpl<Article> implements ArticleService {
@@ -28,6 +31,17 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article> implements Arti
     private CommentDao commentDao;
 
     @Override
+    public Article findByName(String Tname) {
+        Article article = super.findByName(Tname);
+        if (article == null){
+            return null;
+        }
+        article.setBelongedCategory(categoryDao.findById(article.getBelongedCategoryId()));
+        article.setComments(commentDao.findCommentByArticleid(article.getIdarticle()));
+        return article;
+    }
+
+    @Override
     public Article findPopularestByCategoryName(String cateName) {
         return dao.findPopularestByCategoryName(cateName);
     }
@@ -38,7 +52,7 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article> implements Arti
     }
 
     @Override
-    public PageUtil<Article> findAllByPageUtilInv(Integer pageNum) {
+    public PageUtil<Article> findAllByPageUtilImpl(Integer pageNum) {
         // findAllByPageUtil
         PageUtil<Article> articlePageUtil = findAllByPageUtil(pageNum);
         List<Article> articles = articlePageUtil.getTableList();
@@ -51,18 +65,31 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article> implements Arti
         return articlePageUtil;
     }
 
-    public Article findByNameWithPoster(String name){
-        Article article = findByName(name);
-        article.setPoster(userDao.findById(article.getBelongedPosterId()));
-        return article;
-    }
-
+    @Override
     public PageUtil<Article> findAllByCategoryAndPageUtil(String catName,Integer page){
-        return null;
+        int cateCount = dao.getCateCount(catName);
+        PageUtil<Article> articlePageUtil = new PageUtil<>(page,cateCount);
+        List<Article> articles = dao.findByCategoryAndPage(catName, Settings.DEFAULT_BIAS,(page-1)* DEFAULT_PAGENUM, DEFAULT_PAGENUM);
+        for (Article art :
+                articles) {
+            Integer catId = art.getBelongedCategoryId();
+            art.setBelongedCategory(categoryDao.findById(catId));
+        }
+        articlePageUtil.setTableList(articles);
+        return articlePageUtil;
     }
 
     @Override
     public PageUtil<Article> fuzzyFindByContentAndPageUtil(String searchName, Integer page) {
-        return null;
+        int tableCount = dao.fuzzyCount(searchName);
+        PageUtil<Article> articlePageUtil = new PageUtil<>(page,tableCount);
+        List<Article> articles =  fuzzyFindByPage(searchName,page);
+        for (Article art :
+                articles) {
+            Integer catId = art.getBelongedCategoryId();
+            art.setBelongedCategory(categoryDao.findById(catId));
+        }
+        articlePageUtil.setTableList(articles);
+        return articlePageUtil;
     }
 }

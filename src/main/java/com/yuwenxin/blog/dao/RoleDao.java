@@ -19,7 +19,9 @@ public interface RoleDao extends BaseDao<Role> {
     @Select("select * from tb_role")
     List<Role> findAll();
     @Select("select * from tb_role where rolename like concat('%',#{fuzzyname},'%')")
-    List<Role> fuzzyFind(@Param("fuzzyName") String fuzzyname);
+    List<Role> fuzzyFind(@Param("fuzzyname") String fuzzyname);
+    @Select("select count(*) from tb_role where rolename like concat('%',#{fuzzyname},'%')")
+    int fuzzyCount(@Param("fuzzyname") String fuzzyName);
     @Select("select * from tb_role where idrole>#{bias} limit #{start},#{pageNum}")
     List<Role> findAllByPage(@Param("bias") Integer bias, @Param("start") Integer start, @Param("pageNum") Integer pageNum);
     @Select("select * from tb_role where rolename like concat('%',#{fuzzyname},'%') and idrole>#{bias} limit #{start},#{pageNum}")

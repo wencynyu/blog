@@ -19,4 +19,5 @@ public interface BaseDao<T> {
     int update(T t);
 
     int getCount();
+    int fuzzyCount(String fuzzyName);
 }

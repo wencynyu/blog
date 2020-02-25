@@ -18,7 +18,9 @@ public interface CommentDao extends BaseDao<Comment> {
     @Select("select * from tb_comment")
     List<Comment> findAll();
     @Select("select * from tb_comment where content like concat('%',#{fuzzyname},'%')")
-    List<Comment> fuzzyFind(@Param("fuzzyName") String fuzzyname);
+    List<Comment> fuzzyFind(@Param("fuzzyname") String fuzzyname);
+    @Select("select count(*) from tb_comment where content like concat('%',#{fuzzyname},'%')")
+    int fuzzyCount(@Param("fuzzyname") String fuzzyName);
     @Select("select * from tb_comment where idcomment>#{bias} limit #{start},#{pageNum}")
     List<Comment> findAllByPage(@Param("bias") Integer bias, @Param("start") Integer start, @Param("pageNum") Integer pageNum);
     @Select("select * from tb_comment where content like concat('%',#{fuzzyname},'%') and idcomment>#{bias} limit #{start},#{pageNum}")
@@ -38,4 +40,8 @@ public interface CommentDao extends BaseDao<Comment> {
 
     @Select("select count(*) from tb_comment")
     int getCount();
+
+    // 评论未实现分页，当博客浏览数超过一定量，可能带来需要分页的量的评论时再实现
+    @Select("select * from tb_comment where belongedArticleId = #{articleid}")
+    List<Comment> findCommentByArticleid(@Param("articleid") int articleid);
 }

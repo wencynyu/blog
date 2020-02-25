@@ -35,7 +35,7 @@ public class CommonController {
         ModelAndView mv = new ModelAndView();
 
         List<Category> categories = categoryService.findAll();
-        categories.remove(0); // 0为无类别属性，这里将其移除
+        categories.remove(categoryService.findById(1)); // 0为无类别属性，这里将其移除
         Map<Category,Article> categoryArticleMap = new HashMap<>();
 
         for (Category cat :
@@ -67,7 +67,7 @@ public class CommonController {
         log.info("跳转至登录页面");
         ModelAndView mv = new ModelAndView();
         // thymeleaf语法中只能识别已经添加在request中的attribute，若不添加则会报错模板解析错误
-//        mv.addObject("user",new User());
+        mv.addObject("user",new User());
         mv.addObject("errors",new HashMap<>());
         mv.setViewName("user/login");
         return mv;
@@ -83,10 +83,13 @@ public class CommonController {
     }
 
     @RequestMapping("/noAuth")
-    public ModelAndView toError(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("403");
-        return mv;
+    public String toError(){
+        return "403";
+    }
+
+    @RequestMapping("/404")
+    public String to404(){
+        return "404";
     }
 
     @RequestMapping("/aboutMe")

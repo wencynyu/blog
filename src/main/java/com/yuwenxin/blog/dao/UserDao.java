@@ -17,7 +17,9 @@ public interface UserDao extends BaseDao<User> {
     @Select("select * from tb_user")
     List<User> findAll();
     @Select("select * from tb_user where username like concat('%',#{fuzzyname},'%')")
-    List<User> fuzzyFind(@Param("fuzzyName") String fuzzyname);
+    List<User> fuzzyFind(@Param("fuzzyname") String fuzzyname);
+    @Select("select count(*) from tb_user where username like concat('%',#{fuzzyname},'%')")
+    int fuzzyCount(@Param("fuzzyname") String fuzzyName);
     @Select("select * from tb_user where iduser>#{bias} limit #{start},#{pageNum}")
     List<User> findAllByPage(@Param("bias") Integer bias, @Param("start") Integer start, @Param("pageNum") Integer pageNum);
     @Select("select * from tb_user where username like concat('%',#{fuzzyname},'%') and iduser>#{bias} limit #{start},#{pageNum}")
