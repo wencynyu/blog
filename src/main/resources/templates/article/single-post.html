@@ -161,7 +161,7 @@
                         <h3 class="eskimo-title-with-border">
                             <span>Comments</span>
                         </h3>
-                        <div class="eskimo_commentlist" th:each="${article.comments}">
+                        <div class="eskimo_commentlist" th:each="comment:${article.comments}">
                             <!-- COMMENT 1 -->
                             <div class="eskimo_comment_wrapper">
                                 <div class="eskimo_comments">

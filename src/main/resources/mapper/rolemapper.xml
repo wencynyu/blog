@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuwenxin.blog.dao.ArticleDao">
+  <insert id="insert" parameterType="com.yuwenxin.blog.model.security.Role" useGeneratedKeys="true" keyProperty="idrole">
+    insert into tb_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idrole != null">
+        idrole,
+      </if>
+      <if test="roleName != null">
+        roleName,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idrole != null">
+        #{idrole,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.yuwenxin.blog.model.security.Role">
+    update tb_article
+    set x = #{}
+    where idarticle = #{idarticle,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -30,7 +30,7 @@
               <div class="card-category">
                 <a href="#" th:text="${arts.belongedCategory.categoryName}">Food &amp; Drink</a>
               </div>
-              <h3 class="card-title"><a href="#" th:href="@{'/article/view/'+${arts.title}}" th:text="${arts.title}">Ketchup Flavored Ice Cream!</a></h3>
+              <h3 class="card-title"><a href="#" th:href="@{'/article/view/detail/'+${arts.title}}" th:text="${arts.title}">Ketchup Flavored Ice Cream!</a></h3>
               <div class="card-excerpt">
                 <p th:text="${arts.content}">Mandaremus illum possumus ullamco e qui de nisi enim anim. Si nulla si nisi, veniam litteris sed excepteur ne ut amet deserunt tempor nam expetendis de enim mandaremus. Ita ea minim esse cillum ut eram arbitror ullamco. Tamen ad expetendis ab ipsum proident...</p>
               </div>

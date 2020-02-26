@@ -41,7 +41,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="iduser != null">
-        #{iduser,jdbcType=Integer}
+        #{iduser,jdbcType=Integer},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -81,7 +81,8 @@
     set username = #{username,jdbcType=VARCHAR},
         password = #{password,jdbcType=VARCHAR},
         gender = #{gender,jdbcType=VARCHAR},
-        phonenumber = #{phoneNumber,jdbcType=VARCHAR},
+        phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+        latestLoginDate = #{latestLoginDate,jdbcType=TIMESTAMP},
         isAdmin = #{isAdmin,jdbcType=TINYINT},
         isChecked = #{isChecked,jdbcType=TINYINT},
         status = #{status,jdbcType=TINYINT}

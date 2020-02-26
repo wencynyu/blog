@@ -2,11 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yuwenxin.blog.dao.TagDao">
-  <insert id="insert" parameterType="com.yuwenxin.blog.model.Article" useGeneratedKeys="true" keyProperty="idarticle">
-
+  <insert id="insert" parameterType="com.yuwenxin.blog.model.Tag" useGeneratedKeys="true" keyProperty="idarticle">
+    insert into tb_tag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idtag != null">
+        idtag,
+      </if>
+      <if test="tagName != null">
+        tagName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idtag != null">
+        #{idtag,jdbcType=INTEGER},
+      </if>
+      <if test="tagName != null">
+        #{tagName,jdbcType=VARCHAR},
+      </if>
+    </trim>
   </insert>
 
-  <update id="update" parameterType="com.yuwenxin.blog.model.Article">
-
+  <update id="update" parameterType="com.yuwenxin.blog.model.Tag">
+    update tb_tag
+    set tagName = #{tagName,jdbcType=VARCHAR}
+    where idtag = #{idtag,jdbcType=INTEGER}
   </update>
 </mapper>

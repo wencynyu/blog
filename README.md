@@ -1,2 +1,2 @@
-# blog
-javaweb -> springboot+thymeleaf+shiro+druid+mybati
+# 私人的blog系统
+javaweb -> springboot+thymeleaf+shiro+druid+mybatis
