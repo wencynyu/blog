@@ -76,10 +76,14 @@
           </li>
           <li><a href="#">我的作品集</a></li>
           <li><a href="#" th:href="@{/aboutMe}">关于我</a></li>
-          <li shiro:user><a href="#">向博主提问</a></li>
-          <li shiro:hasRole="admin"><a href="#">博文管理</a></li>
-          <li shiro:hasRole="admin"><a href="#">后台管理</a></li>
+          <li shiro:hasRole="admin"><a href="#">网站管理</a>
+            <ul class="sub-menu">
+              <li><a href="#">博文管理</a></li>
+              <li><a href="#">后台管理</a></li>
+            </ul>
+          </li>
           <li shiro:guest><a th:href="@{/login}" style="float: left">登录/</a><a th:href="@{/register}" style="float: left">注册</a>&nbsp;</li>
+          <li shiro:user><a href="#">向博主提问</a></li>
           <li shiro:user><a th:href="@{/logout}">注销当前用户</a></li>
 <!--          <li th:if="${#session.getAttribute('user').getIduser() == null}"><a th:href="@{/login}" style="float: left">登录/</a><a th:href="@{/register}" style="float: left">注册</a>&nbsp;</li>-->
 <!--          <li th:if="${#session.getAttribute('user').isAdmin()}"><a href="#">后台管理</a></li>-->
