@@ -37,7 +37,10 @@
   <update id="update" parameterType="com.yuwenxin.blog.model.Article">
     update tb_article
     set title = #{title,jdbcType=VARCHAR},
-        content = #{content,jdbcType=LONGVARCHAR}
+        content = #{content,jdbcType=LONGVARCHAR},
+        top = #{top,jdbcType=TINYINT},
+        watchedNum = #{watchedNum,jdbcType=INTEGER},
+        likeNum = #{likeNum,jdbcType=INTEGER}
     where idarticle = #{idarticle,jdbcType=INTEGER}
   </update>
 </mapper>

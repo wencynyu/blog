@@ -25,6 +25,7 @@ public class Article implements Serializable {
     private String title;
     private String content;
     private Integer watchedNum,likeNum;
+    private Boolean top;
 
     private Date postTime;
 

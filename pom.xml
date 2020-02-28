@@ -70,6 +70,13 @@
       <version>1.5.0</version>
     </dependency>
 
+    <!-- 这个包用来让博客文章支持markdown语法 -->
+    <!-- https://mvnrepository.com/artifact/org.pegdown/pegdown -->
+    <dependency>
+      <groupId>org.pegdown</groupId>
+      <artifactId>pegdown</artifactId>
+      <version>1.6.0</version>
+    </dependency>
 
     <!-- 测试相关的依赖（springboottest+junit4），这些依赖包只存在于test-scope，编译阶段不包括 -->
     <dependency>

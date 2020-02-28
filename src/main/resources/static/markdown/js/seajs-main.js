@@ -1,6 +1,6 @@
 define(function(require){
 	var $ = require("jquery");
-	var editormd = require("editormd");
+	var editormd = require("static/markdown/js/editormd");
     
     require("../../src/js/languages/en"); // 加载英语语言包
     

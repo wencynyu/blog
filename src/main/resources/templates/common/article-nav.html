@@ -1,4 +1,4 @@
-<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <nav th:fragment="blog-nav" class="navbar navbar-expand-sm navbar-expand- bg-dark navbar-dark fixed-top" style="padding: 0 6.5%;">
   <a class="navbar-brand" href="#">Navbar</a>
@@ -38,6 +38,9 @@
           <a class="dropdown-item" href="#" th:href="@{/article/view/category/游戏}">游戏</a>
           <a class="dropdown-item" href="#" th:href="@{/article/view/category/电子产品}">电子产品</a>
         </div>
+      </li>
+      <li shiro:hasRole="admin" class="nav-item">
+        <a class="nav-link" href="#" th:href="@{/article/add}">写博客</a>
       </li>
     </ul>
   </div>

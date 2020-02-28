@@ -5,16 +5,19 @@ import com.yuwenxin.blog.model.Article;
 import com.yuwenxin.blog.model.Category;
 import com.yuwenxin.blog.model.Comment;
 import com.yuwenxin.blog.service.ArticleService;
+import com.yuwenxin.blog.service.CategoryService;
 import com.yuwenxin.blog.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +34,8 @@ public class ArticleController {
      */
     @Autowired
     private ArticleService service;
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping("/view/all-blogs")
     public ModelAndView allBlog(@RequestParam(value = "page", defaultValue = "1")Integer page){
@@ -53,6 +58,8 @@ public class ArticleController {
         mv.addObject("article",article);
         mv.addObject("comment",new Comment());
         mv.setViewName("article/single-post");
+        article.setWatchedNum(article.getWatchedNum() + 1);
+        service.update(article);
         return mv;
     }
 
@@ -90,5 +97,53 @@ public class ArticleController {
         mv.setViewName("article/search-blogs");
         return mv;
 
+    }
+
+    @RequestMapping("/delete/{id}")
+    public ModelAndView doDelete(@PathVariable("id") Integer id){
+        ModelAndView mv = new ModelAndView();
+        service.deleteById(id);
+        PageUtil<Article> articlePageUtil = service.findAllByPageUtilImpl(1);  // 返回第一页
+        mv.addObject("articlePageUtil", articlePageUtil);
+        mv.setViewName("article/all-blogs");
+        return mv;
+    }
+
+    @RequestMapping("/update/to/{id}")
+    public ModelAndView toUpdate(@PathVariable("id") Integer id){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("article", service.findById(id));
+        mv.setViewName("article/edit-blog");
+        return mv;
+    }
+
+    @RequestMapping("/update/do/{id}")
+    public ModelAndView doUpdate(@PathVariable("id") Integer id,@ModelAttribute("article") Article article){
+        ModelAndView mv = new ModelAndView();
+        service.update(article);
+        mv.addObject("article", article);
+        mv.setViewName("article/single-post");
+        return mv;
+    }
+
+    @RequestMapping("/add")
+    public ModelAndView toAdd(){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("article",new Article());
+        mv.addObject("cates",categoryService.findAll());
+        mv.setViewName("article/add-blog");
+        return mv;
+    }
+
+    @RequestMapping("/doAdd")
+    public ModelAndView doAdd(@ModelAttribute("article") Article article,@ModelAttribute("cateName") String cateName){
+        ModelAndView mv = new ModelAndView();
+        article.setPostTime(new Date());
+        article.setBelongedCategoryId(categoryService.findByName(cateName).getIdcategory());
+        service.insert(article);
+        mv.addObject("article", service.findByName(article.getTitle()));
+        mv.addObject("comment", new Comment());
+        mv.setViewName("article/single-post");
+        return mv;
     }
 }

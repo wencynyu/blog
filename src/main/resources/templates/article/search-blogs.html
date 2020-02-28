@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <div th:replace="common/head::head"></div>
 <body>
 <!-- READING POSITION INDICATOR -->
@@ -32,7 +32,7 @@
               </div>
               <h3 class="card-title"><a href="#" th:href="@{'/article/view/detail/'+${arts.title}}" th:text="${arts.title}">Ketchup Flavored Ice Cream!</a></h3>
               <div class="card-excerpt">
-                <p th:text="${arts.content}">Mandaremus illum possumus ullamco e qui de nisi enim anim. Si nulla si nisi, veniam litteris sed excepteur ne ut amet deserunt tempor nam expetendis de enim mandaremus. Ita ea minim esse cillum ut eram arbitror ullamco. Tamen ad expetendis ab ipsum proident...</p>
+                <p th:text="${arts.content}" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">Mandaremus illum possumus ullamco e qui de nisi enim anim. Si nulla si nisi, veniam litteris sed excepteur ne ut amet deserunt tempor nam expetendis de enim mandaremus. Ita ea minim esse cillum ut eram arbitror ullamco. Tamen ad expetendis ab ipsum proident...</p>
               </div>
               <div class="card-horizontal-meta">
                 <div class="eskimo-author-meta">
@@ -43,6 +43,8 @@
                 </div>
                 <div class="eskimo-reading-meta" th:text="${arts.watchedNum} + ' reads'">3 min read</div>
                 <div class="eskimo-reading-meta" th:text="${arts.likeNum} + ' likes'">3 min like</div>
+                <div class="eskimo-reading-meta"><a href="#" th:href="@{'/article/update/to/' + ${arts.idarticle}}">编辑</a></div>
+                <div class="eskimo-reading-meta"><a href="#" th:href="@{'/article/delete/' + ${arts.idarticle}}">删除</a></div>
               </div>
             </div>
             <div class="card-horizontal-right" data-img="http://eskimo.egemenerd.com/wp-content/uploads/2018/05/blog4-1-1024x707.jpg">

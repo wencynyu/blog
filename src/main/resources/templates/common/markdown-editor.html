@@ -22,19 +22,13 @@
         testEditor = editormd("test-editormd", {
             width           : "90%",
             autoHeight      : true,
-            path            : "../../static/markdown/lib/",
+            path            : "../article/markdown/lib/",
             htmlDecode      : "style,script,iframe",
             tex             : true,
             emoji           : true,
             taskList        : true,
             flowChart       : true,
             sequenceDiagram : true
-        });
-
-        $("#append-btn").click(function(){
-            $.get("../../static/markdown/test.md", function(md){
-                testEditor.appendMarkdown(md);
-            });
         });
     });
 </script>
