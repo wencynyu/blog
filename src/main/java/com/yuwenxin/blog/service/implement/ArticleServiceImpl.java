@@ -6,6 +6,7 @@ import com.yuwenxin.blog.core.Settings;
 import com.yuwenxin.blog.dao.*;
 import com.yuwenxin.blog.model.Article;
 import com.yuwenxin.blog.model.Category;
+import com.yuwenxin.blog.model.Comment;
 import com.yuwenxin.blog.service.ArticleService;
 import org.omg.CORBA.ARG_IN;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,12 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article> implements Arti
             return null;
         }
         article.setBelongedCategory(categoryDao.findById(article.getBelongedCategoryId()));
-        article.setComments(commentDao.findCommentByArticleid(article.getIdarticle()));
+        List<Comment> comments = commentDao.findCommentByArticleid(article.getIdarticle());
+        for (Comment comment :
+                comments) {
+            comment.setPoster(userDao.findById(comment.getBelongedPosterId()));
+        }
+        article.setComments(comments);
         return article;
     }
 
