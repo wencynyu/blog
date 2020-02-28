@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yuwenxin.blog.dao.QuestionDao">
-  <insert id="insert" parameterType="com.yuwenxin.blog.model.Question" useGeneratedKeys="true" keyProperty="idarticle">
+  <insert id="insert" parameterType="com.yuwenxin.blog.model.Question" useGeneratedKeys="true" keyProperty="idquestion">
     insert into tb_question
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idquestion != null">

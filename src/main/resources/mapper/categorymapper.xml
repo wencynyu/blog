@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yuwenxin.blog.dao.CategoryDao">
-  <insert id="insert" parameterType="com.yuwenxin.blog.model.Category" useGeneratedKeys="true" keyProperty="idarticle">
+  <insert id="insert" parameterType="com.yuwenxin.blog.model.Category" useGeneratedKeys="true" keyProperty="idcategory">
     insert into tb_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idcategory != null">
